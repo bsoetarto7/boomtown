@@ -1,0 +1,12 @@
+.appHeader{
+  background-color: white;
+  padding: 10px 0;
+}
+.appbar-left-section, .appbar-right-section{
+  display: flex;
+  align-items: center;
+}
+.appbar-left-section img{
+  max-height: 36px;
+  margin-right: 40px;
+}
