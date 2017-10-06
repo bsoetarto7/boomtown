@@ -1,2 +1,2 @@
-export { default as CardContainer } from './CardContainer'
-export { default as CardList } from './CardList'
+export { default as ItemsCardContainer } from './ItemsCardContainer'
+export { default as ItemsCardList } from './ItemsCardList'

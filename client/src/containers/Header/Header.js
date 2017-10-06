@@ -22,7 +22,7 @@ class Header extends Component {
   render(){
     return(
       <AppBar
-        style={{backgroundColor:'white', display:'flex',alignItems:'center', maxWidth:'1120px', margin:'0 auto',boxShadow:'none'}}
+        style={{backgroundColor:'white', display:'flex',alignItems:'center', maxWidth:'1140px', margin:'0 auto',boxShadow:'none', padding:'0'}}
         iconElementLeft= {
           <LeftSide dropdownList={this.state.dropdownList} handleChange={this.handleChange} selectedValue={this.state.selectedFilter} />
         }
