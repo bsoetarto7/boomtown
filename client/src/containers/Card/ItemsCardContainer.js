@@ -9,10 +9,26 @@ class ItemsCardContainer extends Component {
     this.fetchCardData();
   }
   fetchCardData = () =>{
-    fetch('http://localhost:3001/items').then((response) => 
-      response.json()
-    ).then((data) =>{
-      this.setState({cardData:data})
+    const urls = ['http://localhost:3001/items','http://localhost:3001/users']; 
+    Promise.all(urls.map(url =>
+      fetch(url).then(resp => resp.json())
+    )).then(data => {
+      const [items, users] = data;
+      const cardData = items.map(item =>{
+        return {
+          available: item.available,
+          borrower: item.borrower,
+          createdOn: item.createdOn,
+          description: item.description,
+          id: item.id,
+          imageUrl: item.imageUrl,
+          itemOwner: item.itemOwner,
+          tags: item.tags,
+          title: item.title,
+          user: users.find(user => user.id === item.itemOwner)
+        }
+      })
+      this.setState({cardData})
     })
   }
   render(){
