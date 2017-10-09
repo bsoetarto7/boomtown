@@ -5,6 +5,7 @@ class ProfileContainer extends Component {
   state = {  }
   state={
     profileCardData:[],
+    numberItemsBorrowed:[],
     profileUser:{}
   }
   componentDidMount(){
@@ -21,6 +22,11 @@ class ProfileContainer extends Component {
           return user
         }  
       });
+      const numberItemsBorrowed = items.filter((item)=>{
+        if(this.props.match.params.profileID === item.borrower){
+          return item
+        }
+      }).length;
       const profileCardData = items.filter((item) =>{
         if(this.props.match.params.profileID === item.itemOwner){
           return item
@@ -39,13 +45,13 @@ class ProfileContainer extends Component {
           user: users.find(user => user.id === item.itemOwner)
         }
       })
-      this.setState({profileCardData, profileUser})
+      this.setState({profileCardData, profileUser, numberItemsBorrowed})
     })
   }
   render() {
     return (
       <section>
-        <Profile profileCardData={this.state.profileCardData} profileUser={this.state.profileUser}/>
+        <Profile profileCardData={this.state.profileCardData} profileUser={this.state.profileUser} numberItemsBorrowed={this.state.numberItemsBorrowed}/>
       </section>
     );
   }

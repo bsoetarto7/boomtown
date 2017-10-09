@@ -20,15 +20,15 @@ import { ProfileContainer } from  './containers/Profile';
 
 const Boomtown = () => (
     <MuiThemeProvider muiTheme={muiTheme}>
-        <Layout>
-            <Router>
+        <Router>
+            <Layout>
                 <Switch>
                     {/* <Login /> */}
                     <Route exact path="/" component={ItemsCardContainer} />
                     <Route exact path="/profile/:profileID" component={ProfileContainer} />
                 </Switch>
-            </Router>
-        </Layout>
+            </Layout>
+        </Router>
     </MuiThemeProvider>
 
 );

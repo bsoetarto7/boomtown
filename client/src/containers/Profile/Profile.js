@@ -1,10 +1,13 @@
 import React from 'react';
-import { ItemsCard } from '../../components/Card'
+import { ItemsCard } from '../../components/Card';
+import { ProfileCard } from '../../components/Profile';
 
-const Profile = ({profileCardData,profileUser}) => {
+const Profile = ({profileCardData,profileUser, numberItemsBorrowed}) => {
   return(
     <div>
-      { profileCardData.map(data => 
+      <ProfileCard profileUser={profileUser} itemsShared={profileCardData.length} numberItemsBorrowed={numberItemsBorrowed}/>
+      { 
+        profileCardData.map(data => 
           <ItemsCard 
             key         ={data.id}
             title       ={data.title}
