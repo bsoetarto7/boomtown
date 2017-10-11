@@ -5,7 +5,7 @@ import { CardImage, CardTitleSubtitle, CardContentText, CardAuthor, CardButton }
 
 const ItemsCard = ({title, itemOwner, imageUrl, description, tags, createdOn, available, user}) =>{
   return(
-    <Card style={{maxWidth:'30%', margin:'40px 1.5%', display:'inline-block'}}>
+    <Card style={{display:'inline-block'}}>
       <CardImage imageUrl={imageUrl} available={available}/>
       <Link to={`/profile/${user.id}`}><CardAuthor email={user.email} fullName={user.fullName} createdOn={createdOn}/></Link>
       <CardTitleSubtitle title={title} tags={tags}/>

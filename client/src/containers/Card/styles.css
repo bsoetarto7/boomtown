@@ -1,0 +1,20 @@
+.card-container{
+  width:100%;
+  margin-top: 40px;
+}
+.my-gallery-class .image-element-class{
+  width: 33%;
+  padding: 20px 1.5%;
+}
+@media (min-width: 768px) and (max-width:991px){
+  .my-gallery-class .image-element-class{
+    width: 50%;
+    padding: 20px 1.5%;
+  }
+}
+@media (max-width:767px){
+  .my-gallery-class .image-element-class{
+    width: 100%;
+    padding: 20px 1.5%;
+  }
+}

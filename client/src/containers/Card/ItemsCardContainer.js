@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ItemsCardList } from './index';
+import './styles.css';
 
 class ItemsCardContainer extends Component {
   state={
@@ -33,7 +34,7 @@ class ItemsCardContainer extends Component {
   }
   render(){
     return(
-        <section>
+        <section className="card-container">
           <ItemsCardList cardData={this.state.cardData}/>
         </section>
     )
