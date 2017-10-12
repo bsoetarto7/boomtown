@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Profile } from './index';
+import './styles.css';
 
 class ProfileContainer extends Component {
   state = {  }
@@ -50,7 +51,7 @@ class ProfileContainer extends Component {
   }
   render() {
     return (
-      <section>
+      <section className="profile-container">
         <Profile profileCardData={this.state.profileCardData} profileUser={this.state.profileUser} numberItemsBorrowed={this.state.numberItemsBorrowed}/>
       </section>
     );

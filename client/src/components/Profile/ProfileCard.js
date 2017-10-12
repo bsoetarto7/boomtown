@@ -9,7 +9,6 @@ const ProfileCard = ({profileUser,itemsShared,numberItemsBorrowed}) => {
     padding:'40px 20px',
     display:'flex'
   }
-  console.log(profileUser);
   return(
     <Paper zDepth={1} style={style}>
       <div style={{flex:'0 0 50%',padding:'0 15px'}}>
