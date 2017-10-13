@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { ItemsCardList } from './index';
+import { getItems } from '../../redux/modules/items/reducer';
+import { connect } from 'react-redux';
 import './styles.css';
 
 class ItemsCardContainer extends Component {
-  state={
-    cardData:[]
-  }
+
   componentDidMount(){
     this.fetchCardData();
   }
@@ -29,16 +29,21 @@ class ItemsCardContainer extends Component {
           user: users.find(user => user.id === item.itemOwner)
         }
       })
-      this.setState({cardData})
+      this.props.dispatch(getItems(cardData))
     })
   }
   render(){
+    const { cardData } = this.props;
     return(
         <section className="card-container">
-          <ItemsCardList cardData={this.state.cardData}/>
+          <ItemsCardList cardData={cardData}/>
         </section>
     )
   }
 }
 
-export default ItemsCardContainer
+export default connect((state)=>{
+  return {
+    cardData: state.itemWithUser.itemsNormalized
+  }
+})(ItemsCardContainer);

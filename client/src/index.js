@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import { 
     BrowserRouter as Router, 
     Route,
-    Switch,
-    Link,
-    Redirect
+    Switch
   } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
@@ -33,5 +33,8 @@ const Boomtown = () => (
 
 );
 
-ReactDOM.render(<Boomtown />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <Boomtown />
+    </Provider>, document.getElementById('root'));
 registerServiceWorker();
