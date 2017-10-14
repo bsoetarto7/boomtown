@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configStore from './configStore';
 import { Provider } from 'react-redux';
-import store from './redux/store';
 import { 
     BrowserRouter as Router, 
     Route,
@@ -18,6 +18,9 @@ import Login from './containers/Login';
 import { ItemsCardContainer } from  './containers/Card';
 import { ProfileContainer } from  './containers/Profile';
 
+
+const store = configStore();
+
 const Boomtown = () => (
     <MuiThemeProvider muiTheme={muiTheme}>
         <Router>
@@ -30,11 +33,10 @@ const Boomtown = () => (
             </Layout>
         </Router>
     </MuiThemeProvider>
-
 );
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Boomtown />
-    </Provider>, document.getElementById('root'));
+<Provider store={store}>
+  <Boomtown />
+ </Provider>, document.getElementById('root'));
 registerServiceWorker();
