@@ -17,7 +17,7 @@ import Layout from './components/Layout';
 import Login from './containers/Login';
 import { ItemsCardContainer } from  './containers/Card';
 import { ProfileContainer } from  './containers/Profile';
-
+import { NotFound } from './containers/NotFound';
 
 const store = configStore();
 
@@ -26,9 +26,10 @@ const Boomtown = () => (
         <Router>
             <Layout>
                 <Switch>
-                    {/* <Login /> */}
+                    <Route exact path="/login" component={Login} />
                     <Route exact path="/" component={ItemsCardContainer} />
                     <Route exact path="/profile/:profileID" component={ProfileContainer} />
+                    <Route path ="*" component={NotFound} />
                 </Switch>
             </Layout>
         </Router>

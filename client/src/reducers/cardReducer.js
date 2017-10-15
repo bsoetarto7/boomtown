@@ -6,11 +6,11 @@ const initialState = {
   filteredItems:[]
 }
 
-const mergerUsersItems = (users,items) => {
+const updateUsersWithItemsBorrowed = (users,items) => {
   return users.map(user => {
     return{
       ...user,
-      items: items.filter(item => item.itemOwner === user.id)
+      numberItemsBorrowed: items.filter((item)=>{ if(user.id === item.borrower) return item }).length,
     }
   })
 }
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
       return{
         ...state,
         isLoading:false,
-        users: mergerUsersItems(action.users, action.items),
+        users: updateUsersWithItemsBorrowed(action.users, action.items),
         items: mergerItemsUsers(action.users, action.items)
       }
     case 'GET_USERS_ERROR':

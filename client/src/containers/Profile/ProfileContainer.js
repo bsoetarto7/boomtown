@@ -13,10 +13,9 @@ class ProfileContainer extends Component {
   }
   render() {
     const { profileUserData, profileCardData } = this.props
-
     return (
       <section className="profile-container">
-        {profileUserData ? <Profile profileCardData={profileCardData} profileUser={profileUserData} numberItemsBorrowed={2}/>:false}
+        {profileUserData ? <Profile profileCardData={profileCardData} profileUser={profileUserData} numberItemsBorrowed={profileUserData.numberItemsBorrowed}/>:false}
       </section>
     );
   }

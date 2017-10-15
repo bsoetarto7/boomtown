@@ -1,1 +1,3 @@
-export { getCardItems } from './cardActions'
+export { getCardItems } from './cardActions';
+
+export { getSelectItems, setFilteredtItems } from './selectActions';

@@ -1,0 +1,17 @@
+.boom-notfound {
+  width:100%;
+  height:calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.boom-notfound h1{
+  text-align: center;
+  font-size: 2.5rem;
+  color:white;
+}
+.boom-notfound p{
+  text-align: center;
+  font-size: 1.2rem;
+  color:white;
+}
