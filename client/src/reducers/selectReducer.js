@@ -8,7 +8,7 @@ const initialState = {
     {id:6, name:'Sporting Goods'},
     {id:7, name:'Tools'}
   ],
-  filtereditems:null
+  filtereditems: []
 }
 
 export default (state = initialState, action) => {

@@ -23,8 +23,13 @@ class ItemsCardContainer extends Component {
 }
 
 const mapStateToProps = (state) =>{
+  console.log(state);
   return {
-    cardData: state.users.items
+    cardData: state.selectDropDown.filtereditems.length > 0 ? state.users.items.filter(item =>{
+      if(item.tags.some(r => state.selectDropDown.filtereditems.indexOf(r) >= 0)){
+        return item
+      }
+    }) : state.users.items 
   }
 }
 
