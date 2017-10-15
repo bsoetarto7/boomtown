@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 import { Header } from '../../containers/Header';
 import './styles.css';
 
@@ -9,7 +10,8 @@ const Layout = ({ children }) => (
         
         <div className="appHeader">
             {/* Might want to put your header bar here... */}
-            <Header/>
+            <Route exact path="/" component={Header} />
+            <Route exact path="/profile/:profileID" component={Header} />
         </div>
         <div className="appContent">
             {children}
