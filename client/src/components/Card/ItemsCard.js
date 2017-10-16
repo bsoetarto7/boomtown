@@ -8,7 +8,7 @@ const ItemsCard = ({title, itemOwner, imageUrl, description, tags, createdOn, av
   return(
     <Card style={{display:'inline-block'}}>
       <CardImage imageUrl={imageUrl} available={available}/>
-      <Link to={`/profile/${user.id}`}><CardAuthor email={user.email} fullName={user.fullName} createdOn={createdOn}/></Link>
+      <Link to={`/profile/${user.id}`}><CardAuthor email={user.email} fullName={user.fullname} createdOn={createdOn}/></Link>
       <CardTitleSubtitle title={title} tags={tags}/>
       <CardContentText  description={description}/>
       {available ? <CardButton/> : false}

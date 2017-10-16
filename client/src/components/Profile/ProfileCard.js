@@ -12,7 +12,7 @@ const ProfileCard = ({profileUser,itemsShared,numberItemsBorrowed}) => {
   return(
     <Paper zDepth={1} style={style}>
       <div style={{flex:'0 0 50%',padding:'0 15px'}}>
-        <h2 style={{fontSize:'32px',marginTop:'0px'}}>{profileUser.fullName}</h2>
+        <h2 style={{fontSize:'32px',marginTop:'0px'}}>{profileUser.fullname}</h2>
         <p style={{color:'DarkGrey'}}>{profileUser.bio}</p>
       </div>
       <div style={{display:'flex',flex:'0 0 50%',paddin:'0 15px'}}>

@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) =>{
       }
     }),
     profileCardData: state.users.items.filter(item=>{
-      if(ownProps.match.params.profileID === item.itemOwner){
+      if(ownProps.match.params.profileID === item.itemowner){
         return item
       }
     })

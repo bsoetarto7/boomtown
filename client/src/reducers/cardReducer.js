@@ -19,7 +19,7 @@ const mergerItemsUsers = (users,items) => {
   return items.map(item => {
     return{
       ...item,
-      user: users.find(user => item.itemOwner === user.id)
+      user: users.find(user => item.itemowner === user.id)
     }
   })
 }
