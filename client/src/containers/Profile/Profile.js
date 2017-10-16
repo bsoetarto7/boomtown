@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ItemsCardList } from '../Card';
 import { ProfileCard } from '../../components/Profile';
 
@@ -10,5 +11,11 @@ const Profile = ({profileCardData,profileUser, numberItemsBorrowed}) => {
     </div>
   )
 }
+
+Profile.propTypes = {
+  profileUser: PropTypes.object,
+  profileCardData: PropTypes.array.isRequired,
+  numberItemsBorrowed: PropTypes.number.isRequired
+};
 
 export default Profile;

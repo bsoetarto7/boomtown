@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CardMedia,CardTitle } from 'material-ui/Card';
 
 const CardImage = ({imageUrl, available}) => {
@@ -8,5 +9,10 @@ const CardImage = ({imageUrl, available}) => {
     </CardMedia>
   )
 }
+
+CardImage.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  available: PropTypes.bool.isRequired
+};
 
 export default CardImage;

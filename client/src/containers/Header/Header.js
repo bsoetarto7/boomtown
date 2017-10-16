@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import PropTypes from 'prop-types';
 import { LeftSide, RightSide } from './index';
 import { getSelectItems, setFilteredtItems } from '../../actions';
 import { connect } from 'react-redux';
@@ -26,6 +27,11 @@ class Header extends Component {
     )
   }
 }
+
+Header.propTypes = {
+  dropdownList: PropTypes.array.isRequired,
+  dropdownList: PropTypes.array.isRequired
+};
 
 export default connect((state)=>{
   return {

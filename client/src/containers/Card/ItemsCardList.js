@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Masonry from 'react-masonry-component';
 import { ItemsCard } from '../../components/Card';
 import './styles.css';
@@ -31,5 +32,9 @@ const ItemsCardList = ({ cardData }) =>  {
     </Masonry>
   )
 }
+
+ItemsCardList.propTypes = {
+  cardData: PropTypes.array.isRequired
+};
 
 export default ItemsCardList;

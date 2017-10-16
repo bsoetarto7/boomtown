@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Profile } from './index';
 import { getCardItems } from '../../actions';
 import { connect } from 'react-redux';
@@ -35,5 +36,10 @@ const mapStateToProps = (state, ownProps) =>{
     })
   }
 }
+
+ProfileContainer.propTypes = {
+  profileUserData: PropTypes.object,
+  profileCardData: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, { getCardItems })(ProfileContainer);

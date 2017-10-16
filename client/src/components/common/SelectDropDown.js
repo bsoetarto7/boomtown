@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -9,5 +10,11 @@ const SelectDropDown = ({ handleChange, selectedValue, dropdownList }) =>{
     </SelectField>
   )
 }
+
+SelectDropDown.propTypes = {
+  dropdownList: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  selectedValue: PropTypes.array.isRequired
+};
 
 export default SelectDropDown
