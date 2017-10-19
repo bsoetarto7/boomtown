@@ -10,7 +10,7 @@ const resolveFunctions = {
         .catch(errors => console.log(errors));
     },
     item(root, { id }) {
-      return fetch(`${url}/${id}`)
+      return fetch(`${url}/items/${id}`)
         .then(response => response.json())
         .catch(errors => console.log(errors));
     },
