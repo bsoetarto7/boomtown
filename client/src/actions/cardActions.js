@@ -18,6 +18,7 @@ const getCardItemsError = (error) => ({
 
 
 export const getCardItems = () => {
+
   return (dispatch) => {
     dispatch(getCardItemsBegin())
     return fetch(`${mainURL}/items`)
@@ -30,5 +31,6 @@ export const getCardItems = () => {
         dispatch(getCardItemsError(err))
       })
   }
+  
 }
 

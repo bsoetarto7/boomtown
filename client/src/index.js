@@ -18,6 +18,7 @@ import Login from './containers/Login';
 import { ItemsCardContainer } from  './containers/Card';
 import { ProfileContainer } from  './containers/Profile';
 import { NotFound } from './containers/NotFound';
+import { ShareContainer } from './containers/Share';
 
 const store = configStore();
 
@@ -29,6 +30,7 @@ const Boomtown = () => (
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/" component={ItemsCardContainer} />
                     <Route exact path="/profile/:profileID" component={ProfileContainer} />
+                    <Route exact path="/share" component={ShareContainer}/>
                     <Route path ="*" component={NotFound} />
                 </Switch>
             </Layout>

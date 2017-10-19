@@ -7,7 +7,7 @@ import './styles.css';
 const ItemsCardList = ({ cardData }) =>  {
 
   const masonryOptions = {
-      transitionDuration: 0
+      transitionDuration: 1000
   }
   return (
     <Masonry
