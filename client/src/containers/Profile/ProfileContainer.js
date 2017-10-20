@@ -3,43 +3,63 @@ import PropTypes from 'prop-types';
 import { Profile } from './index';
 import { getCardItems } from '../../actions';
 import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import './styles.css';
 
 class ProfileContainer extends Component {
-
-  componentDidMount(){
-    if(this.props.profileCardData.length === 0){
-      this.props.getCardItems();
-    }
-  }
   render() {
-    const { profileUserData, profileCardData } = this.props
+    const { data } = this.props
     return (
       <section className="profile-container">
-        {profileUserData ? <Profile profileCardData={profileCardData} profileUser={profileUserData} numberItemsBorrowed={profileUserData.numberItemsBorrowed}/>:false}
+        {!data.loading ? <Profile profileCardData={data.user.items} profileUser={data.user} numberItemsBorrowed={data.user.borroweditems.length}/>:false}
       </section>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) =>{
-  return {
-    profileUserData: state.users.users.find(user =>{
-      if(ownProps.match.params.profileID === user.id){
-        return user
+const fetchUserData = gql`
+query fetchUserData($id: ID!){
+  user(id: $id){
+    id
+    fullname
+    email
+    bio
+    items{
+      id
+      title
+      description
+      imageurl
+      tags
+      itemowner{
+        id
+        fullname
+        email
+        bio
       }
-    }),
-    profileCardData: state.users.items.filter(item=>{
-      if(ownProps.match.params.profileID === item.itemowner){
-        return item
+      created
+      available
+      borrower{
+        id
+        fullname
       }
-    })
+    }
+    borroweditems{
+      id
+      title
+    }
   }
 }
+`
 
 ProfileContainer.propTypes = {
-  profileUserData: PropTypes.object,
-  profileCardData: PropTypes.array.isRequired
+  data: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { getCardItems })(ProfileContainer);
+export default graphql(fetchUserData, {
+  options: ownProps => ({
+    variables: {
+      id: ownProps.match.params.profileID
+    }
+  }),
+})(ProfileContainer);

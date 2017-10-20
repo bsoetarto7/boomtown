@@ -2,39 +2,47 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ItemsCardList } from './index';
 import { getCardItems } from '../../actions';
-import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import './styles.css';
 
 class ItemsCardContainer extends Component {
-
-  componentDidMount(){
-    if(this.props.cardData.length === 0){
-      this.props.getCardItems();
-    }
-  }
-  
   render(){
-    const { cardData } = this.props;
+    const { data } = this.props;
     return(
         <section className="card-container">
-          <ItemsCardList cardData={cardData}/>
+          {!data.loading ?<ItemsCardList cardData={data.items}/>:false}
         </section>
     )
   }
 }
 
-const mapStateToProps = (state) =>{
-  return {
-    cardData: state.selectDropDown.filtereditems.length > 0 ? state.users.items.filter(item =>{
-      if(item.tags.some(r => state.selectDropDown.filtereditems.indexOf(r) >= 0)){
-        return item
+const fetchCardData = gql`
+  query{
+    items{
+      id
+      title
+      description
+      imageurl
+      tags
+      itemowner{
+        id
+        fullname
+        email
+        bio
       }
-    }) : state.users.items 
+      created
+      available
+      borrower{
+        id
+        fullname
+      }
+    }
   }
-}
+`
 
 ItemsCardContainer.propTypes = {
-  cardData: PropTypes.array.isRequired
+  data: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { getCardItems })(ItemsCardContainer);
+export default graphql(fetchCardData)(ItemsCardContainer);

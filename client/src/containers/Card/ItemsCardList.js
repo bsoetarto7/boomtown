@@ -19,13 +19,12 @@ const ItemsCardList = ({ cardData }) =>  {
           <li key={data.id} className="image-element-class">
             <ItemsCard 
               title       ={data.title}
-              itemOwner   ={data.itemowner} 
               imageUrl    ={data.imageurl} 
               description ={data.description}
               tags        ={data.tags}
               createdOn   ={data.created}
               available   ={data.available}
-              user        ={data.user} />
+              user        ={data.itemowner} />
           </li>
         ) 
       }

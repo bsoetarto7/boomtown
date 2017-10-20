@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configStore from './configStore';
-import { Provider } from 'react-redux';
 import { 
     BrowserRouter as Router, 
     Route,
     Switch
   } from 'react-router-dom';
+
+import { ApolloProvider } from 'react-apollo';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -19,6 +21,8 @@ import { ItemsCardContainer } from  './containers/Card';
 import { ProfileContainer } from  './containers/Profile';
 import { NotFound } from './containers/NotFound';
 import { ShareContainer } from './containers/Share';
+
+import client from './config/apolloClient';
 
 const store = configStore();
 
@@ -39,7 +43,7 @@ const Boomtown = () => (
 );
 
 ReactDOM.render(
-<Provider store={store}>
+<ApolloProvider client={client} store={store}>
   <Boomtown />
- </Provider>, document.getElementById('root'));
+</ApolloProvider>, document.getElementById('root'));
 registerServiceWorker();
