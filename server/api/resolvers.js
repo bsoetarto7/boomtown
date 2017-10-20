@@ -1,53 +1,44 @@
 import fetch from 'node-fetch';
-
-const url = 'http://localhost:3001';
+import { getItems, getItem, getUsers, getUser, getUserOwnedItem, getUserBorrowedItem, addCardItemHelper } from './jsonHelpers';
 
 const resolveFunctions = {
   Query: {
     items() {
-      return fetch(`${url}/items`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getItems();
     },
     item(root, { id }) {
-      return fetch(`${url}/items/${id}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getItem(id);
     },
     users() {
-      return fetch(`${url}/users`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getUsers();
     },
     user(root, { id }) {
-      return fetch(`${url}/users/${id}`)
-        .then(response => response.json())
-        .catch(errors => console.log(errors));
+      return getUser(id);
     }
   },
   User: {
     items(user){
-      return fetch(`${url}/items/?itemowner=${user.id}`)
-      .then(response => response.json())
-      .catch(errors => console.log(errors));
+      if(!user.id) return null;
+      return getUserOwnedItem(user.id);
     },
     borroweditems(user){
-      return fetch(`${url}/items/?borrower=${user.id}`)
-      .then(response => response.json())
-      .catch(errors => console.log(errors));
+      if(!user.id) return null;
+      return getUserBorrowedItem(user.id);
     }
   },
   Item: {
     itemowner(item){
-      return fetch(`${url}/users/${item.itemowner}`)
-      .then(response => response.json())
-      .catch(errors => console.log(errors));
+      if (!item.itemowner) return null;
+      return getUser(item.itemowner);
     },
     borrower(item){
       if (!item.borrower) return null;
-      return fetch(`${url}/users/${item.borrower}`)
-      .then(response => response.json())
-      .catch(errors => console.log(errors));
+      return getUser(item.borrower);
+    }
+  },
+  Mutation:{
+    addCardItem(root, args) {
+      return addCardItemHelper(args.title, args.description, args.imageurl, args.tags, args.itemowner);
     }
   }
 };
