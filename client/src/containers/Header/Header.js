@@ -30,12 +30,12 @@ class Header extends Component {
 
 Header.propTypes = {
   dropdownList: PropTypes.array.isRequired,
-  dropdownList: PropTypes.array.isRequired
+  filtereditems: PropTypes.array.isRequired
 };
 
 export default connect((state)=>{
   return {
-    dropdownList: state.selectDropDown.dropdownList,
-    filtereditems: state.selectDropDown.filtereditems
+    dropdownList: state.filterCards.dropdownList,
+    filtereditems: state.filterCards.filtereditems
   }
 })(Header);

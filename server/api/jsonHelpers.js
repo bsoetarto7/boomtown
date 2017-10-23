@@ -26,13 +26,13 @@ export const getUser = (id) => {
   .catch(errors => console.log(errors));
 }
 
-export const getUserOwnedItem = (id) => {
+export const getUserOwnedItems = (id) => {
   return fetch(`${url}/items/?itemowner=${id}`)
   .then(response => response.json())
   .catch(errors => console.log(errors));
 }
 
-export const getUserBorrowedItem = (id) => {
+export const getUserBorrowedItems = (id) => {
   return fetch(`${url}/items/?borrower=${id}`)
   .then(response => response.json())
   .catch(errors => console.log(errors));

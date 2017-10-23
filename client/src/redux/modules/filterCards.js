@@ -1,3 +1,12 @@
+export const getSelectItems = () => ({
+  type: 'GET_SELECT_ITEMS'
+})
+
+export const setFilteredtItems = (filteredItems) => ({
+  type: 'SET_FILTER_ITEMS',
+  filteredItems
+})
+
 const initialState = {
   dropdownList:[
     {id:1, name:'Electronics'},

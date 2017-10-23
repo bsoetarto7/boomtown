@@ -6,34 +6,40 @@ const resolveFunctions = {
     items() {
       return getItems();
     },
-    item(root, { id }) {
-      return getItem(id);
+    item(root, { id }, context) {
+      // return getItem(id);
+      return context.loaders.Item.load(id);
     },
     users() {
       return getUsers();
     },
-    user(root, { id }) {
-      return getUser(id);
+    user(root, { id }, context) {
+      // return getUser(id);
+      return context.loaders.User.load(id);
     }
   },
   User: {
-    items(user){
+    items(user, args, context){
       if(!user.id) return null;
-      return getUserOwnedItem(user.id);
+      // return getUserOwnedItem(user.id);
+      return context.loaders.UserOwnedItems.load(user.id);
     },
-    borroweditems(user){
+    borroweditems(user, args, context){
       if(!user.id) return null;
-      return getUserBorrowedItem(user.id);
+      // return getUserBorrowedItem(user.id);
+      return context.loaders.UserBorrowedItems.load(user.id);
     }
   },
   Item: {
-    itemowner(item){
+    itemowner(item, args, context){
       if (!item.itemowner) return null;
-      return getUser(item.itemowner);
+      // return getUser(item.itemowner);
+      return context.loaders.User.load(item.itemowner);
     },
-    borrower(item){
+    borrower(item, args, context){
       if (!item.borrower) return null;
-      return getUser(item.borrower);
+      // return getUser(item.borrower);
+      return context.loaders.User.load(item.borrower);
     }
   },
   Mutation:{

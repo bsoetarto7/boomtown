@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configStore from './configStore';
+import configStore from './redux/configStore';
 import { 
     BrowserRouter as Router, 
     Route,
