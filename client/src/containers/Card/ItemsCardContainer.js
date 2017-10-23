@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ItemsCardList } from './index';
-import { getCardItems } from '../../actions';
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import './styles.css';
 
 class ItemsCardContainer extends Component {
+  filterCard = (allCards, filteredTags) => {
+    if (filteredTags.length > 0){
+      return allCards.filter(item =>{
+                if(item.tags.some(r => filteredTags.indexOf(r) >= 0)){
+                  return item
+                }
+              })
+    }else{
+      return allCards; 
+    }
+  }
   render(){
-    const { data } = this.props;
+    const { data, filters } = this.props;
+    const cardItems = this.filterCard(data.items, filters);
     return(
         <section className="card-container">
-          {!data.loading ?<ItemsCardList cardData={data.items}/>:false}
+          {!data.loading ?<ItemsCardList cardData={cardItems}/>:false}
         </section>
     )
   }
@@ -45,4 +57,10 @@ ItemsCardContainer.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-export default graphql(fetchCardData)(ItemsCardContainer);
+const mapStateToProps = state => ({ 
+  filters: state.filterCards.filtereditems 
+});
+
+const CardItemsWithData = graphql(fetchCardData)(ItemsCardContainer);
+
+export default connect(mapStateToProps)(CardItemsWithData);

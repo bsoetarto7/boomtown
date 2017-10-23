@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import PropTypes from 'prop-types';
 import { LeftSide, RightSide } from './index';
-import { getSelectItems, setFilteredtItems } from '../../actions';
+import { getSelectItems, setFilteredtItems } from '../../redux/modules/filterCards';
 import { connect } from 'react-redux';
 import './styles.css';
 
@@ -32,6 +32,7 @@ Header.propTypes = {
   dropdownList: PropTypes.array.isRequired,
   filtereditems: PropTypes.array.isRequired
 };
+
 
 export default connect((state)=>{
   return {
