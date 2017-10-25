@@ -15,6 +15,14 @@ export default function(app){
   return {
     getItems(){
       return pgClient.query("SELECT * FROM items").then(res => (res.rows));
+    },
+    getTags(){
+      return pgClient.query("SELECT * FROM tags").then(res => (res.rows));
+    },
+    getTag(id){
+      return pgClient.query(`SELECT tags.id, tags.tagname FROM tags JOIN itemtags on tags.id = itemtags.tagid WHERE itemtags.itemid = ${id}`).then(res =>{
+        return res.rows
+      });
     }
   };
   

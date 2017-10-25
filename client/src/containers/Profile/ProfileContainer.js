@@ -29,7 +29,10 @@ query fetchUserData($id: ID!){
       title
       description
       imageurl
-      tags
+      tags{
+        id
+        tagname
+      }
       itemowner{
         id
         fullname
@@ -37,7 +40,6 @@ query fetchUserData($id: ID!){
         bio
       }
       created
-      available
       borrower{
         id
         fullname

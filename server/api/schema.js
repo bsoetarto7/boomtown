@@ -15,16 +15,22 @@ const typeDefs = `
     title: String!
     description: String
     imageurl: String
-    tags: [String]
+    tags: [Tag]
     itemowner: User!
     created: String!
     borrower: User
+  }
+  type Tag{
+    id:ID!
+    tagname:String!
   }
   type Query {
     items:[Item]
     item(id: ID!): Item
     users:[User]
     user(id: ID!): User
+    tags:[Tag]
+    tag(id:ID!):Tag
   }
   type Mutation {
     addCardItem(
