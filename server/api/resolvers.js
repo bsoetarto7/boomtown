@@ -1,10 +1,11 @@
 import fetch from 'node-fetch';
-import { getItems, getItem, getUsers, getUser, getUserOwnedItem, getUserBorrowedItem, addCardItemHelper } from './jsonHelpers';
+import { getItem, getUsers, getUser, getUserOwnedItem, getUserBorrowedItem, addCardItemHelper } from './jsonHelpers';
+import { database } from '../index.js';
 
 const resolveFunctions = {
   Query: {
     items() {
-      return getItems();
+      return database.getItems();
     },
     item(root, { id }, context) {
       // return getItem(id);

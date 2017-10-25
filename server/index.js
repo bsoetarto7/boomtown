@@ -5,8 +5,15 @@ import schema from './api/schema';
 import cors from 'cors';
 import createLoaders from './api/loaders';
 
+import  initConfigs from './api/configs';
+import  initPostgres from './api/pg-resource';
+
 const app = express();
-const GQL_PORT = 5000;
+const GQL_PORT = process.env.PORT;
+
+initConfigs(app);
+
+export const database = initPostgres(app);
 
 app.use('*', cors());
 

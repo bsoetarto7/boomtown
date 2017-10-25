@@ -36,7 +36,6 @@ const fetchCardData = gql`
       title
       description
       imageurl
-      tags
       itemowner{
         id
         fullname
@@ -44,7 +43,6 @@ const fetchCardData = gql`
         bio
       }
       created
-      available
       borrower{
         id
         fullname

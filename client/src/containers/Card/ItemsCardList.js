@@ -23,7 +23,7 @@ const ItemsCardList = ({ cardData }) =>  {
               description ={data.description}
               tags        ={data.tags}
               createdOn   ={data.created}
-              available   ={data.available}
+              available   ={data.borrower ? true : false}
               user        ={data.itemowner} />
           </li>
         ) 
