@@ -3,13 +3,13 @@ import { ItemsCard } from '../../components/Card';
 
 import itemPlaceholder from '../../images/item-placeholder.jpg';
 
-const LeftSide = () => {
+const LeftSide = ({itemTitle,itemDescription}) => {
   return(
     <div className="share-card-container">
       <ItemsCard 
-        title       ={'hello'}
+        title       ={itemTitle ? itemTitle : 'Add Title'}
         imageUrl    ={itemPlaceholder} 
-        description ={'hello'}
+        description ={itemDescription ? itemDescription : 'Add Description'}
         tags        ={[]}
         createdOn   ={''}
         available   ={true}

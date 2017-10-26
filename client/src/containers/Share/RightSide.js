@@ -8,33 +8,23 @@ import {
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-
+import { setNextStepIndex,setPrevStepIndex } from '../../redux/modules/shareReducer';
 import { TextInput, TextArea } from '../../components/Share/TextInputs';
 
 class RightSide extends React.Component {
 
-  state = {
-    finished: false,
-    stepIndex: 0,
-  };
-
   handleNext = () => {
-    const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
+    const {stepIndex} = this.props;
+    this.props.dispatch(setNextStepIndex(stepIndex))
   };
 
   handlePrev = () => {
-    const {stepIndex} = this.state;
-    if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
-    }
+    const {stepIndex} = this.props;
+    this.props.dispatch(setPrevStepIndex(stepIndex))
   };
 
   renderStepActions(step) {
-    const {stepIndex} = this.state;
+    const {stepIndex} = this.props;
 
     return (
       <div style={{margin: '12px 0'}}>
@@ -61,7 +51,7 @@ class RightSide extends React.Component {
   }
 
   render() {
-    const {finished, stepIndex} = this.state;
+    const {stepIndex} = this.props;
 
     return (
       <div className="share-stepper-container">

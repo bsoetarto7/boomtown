@@ -6,19 +6,19 @@ import './styles.css';
 
 class ShareContainer extends Component {
   render() {
-    console.log(this.props.inputValues);
+    const { itemTitle, itemDescription } = this.props.inputValues;
     return (
       <section className="share-container">
-        <LeftSide />
-        <RightSide />
+        <LeftSide itemTitle={itemTitle} itemDescription={itemDescription}/>
+        <RightSide stepIndex={this.props.stepIndex}/>
       </section>
     );
   }
 }
-
 export default connect((state) => {
   const values = formValueSelector('newItemForm');
   return {
-    inputValues: values(state, "itemTitle", "itemDescription")
+    inputValues: values(state, "itemTitle", "itemDescription"),
+    stepIndex: state.share.stepIndex
   }
 })(ShareContainer)

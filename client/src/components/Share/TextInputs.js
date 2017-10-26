@@ -13,7 +13,7 @@ export const TextArea = field => (
   <TextField
     required
     hintText="Please input item desc"
-    id="itemTitle"
+    id="itemDescription"
     {...field.input}
     />
 )
