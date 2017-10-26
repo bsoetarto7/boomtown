@@ -12,6 +12,7 @@ const Layout = ({ children }) => (
         <div className="appHeader">
             {/* Might want to put your header bar here... */}
             <Route exact path="/" component={Header} />
+            <Route exact path="/share" component={Header} />
             <Route exact path="/profile/:profileID" component={Header} />
         </div>
         <div className="appContent">

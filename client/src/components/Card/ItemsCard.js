@@ -10,7 +10,7 @@ const ItemsCard = ({title, imageUrl, description, tags, createdOn, available, us
     return acc
   },[]);
   return(
-    <Card style={{display:'inline-block'}}>
+    <Card style={{display:'inline-block'}} className="item-card">
       <CardImage imageUrl={imageUrl} available={available}/>
       <Link to={`/profile/${user.id}`}><CardAuthor email={user.email} fullName={user.fullname} createdOn={createdOn}/></Link>
       <CardTitleSubtitle title={title} tags={tagsReduce}/>

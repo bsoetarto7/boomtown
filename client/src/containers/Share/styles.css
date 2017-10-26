@@ -1,0 +1,19 @@
+.share-container{
+  display: flex;
+  height: calc(100vh - 64px);;
+  align-items: center;
+}
+
+.share-stepper-container{
+  flex: 0 0 50%;
+  padding: 0 15px;
+}
+.share-card-container{
+  flex: 0 0 50%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+}
+.share-container .share-card-container .item-card{
+  max-width: 60%;
+}
