@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Step,
   Stepper,
@@ -12,7 +12,7 @@ import { getStepIndex,setNextStepIndex,setPrevStepIndex } from '../../redux/modu
 import { TextInput, TextArea } from '../../components/Share/TextInputs';
 import { SelectDropDown } from '../../components/common';
 
-class RightSide extends React.Component {
+class RightSide extends Component {
 
   handleNext = () => {
     const {stepIndex} = this.props;

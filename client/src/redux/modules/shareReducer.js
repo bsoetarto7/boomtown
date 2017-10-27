@@ -24,7 +24,8 @@ export const setSelectedTags = (tags) => ({
 
 const initialState = {
   stepIndex:0,
-  selectedTags:[]
+  selectedTags:[],
+  shareDateNow: `${(new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().slice(0, -1).replace('T', ' ')}-07`
 }
 
 export default (state = initialState, action) => {

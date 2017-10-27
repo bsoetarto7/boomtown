@@ -8,16 +8,18 @@ import { setSelectedTags } from '../../redux/modules/shareReducer';
 import './styles.css';
 
 class ShareContainer extends Component {
+ 
   handleChange = (event, index, value) => {
     this.props.dispatch(setSelectedTags(value));
   }
+
   render() {
     const { itemTitle, itemDescription } = this.props.inputValues;
-    const { dropdownList, selectedTags } = this.props
+    const { dropdownList, selectedTags,shareDateNow } = this.props
     const { tags, loading } = this.props.data
     return (
       <section className="share-container">
-        <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags}/>
+        <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags} shareDateNow={shareDateNow}/>
         <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={this.props.stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags}/>
       </section>
     );
@@ -38,7 +40,8 @@ const mapStateToProps = state => {
   return {
     inputValues: values(state, "itemTitle", "itemDescription"),
     stepIndex: state.share.stepIndex,
-    selectedTags: state.share.selectedTags
+    selectedTags: state.share.selectedTags,
+    shareDateNow: state.share.shareDateNow
   }
 };
 

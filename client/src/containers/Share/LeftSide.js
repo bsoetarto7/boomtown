@@ -3,7 +3,7 @@ import { ItemsCard } from '../../components/Card';
 
 import itemPlaceholder from '../../images/item-placeholder.jpg';
 
-const LeftSide = ({itemTitle,itemDescription,selectedTags}) => {
+const LeftSide = ({itemTitle,itemDescription,selectedTags, shareDateNow}) => {
   return(
     <div className="share-card-container">
       <ItemsCard 
@@ -11,7 +11,7 @@ const LeftSide = ({itemTitle,itemDescription,selectedTags}) => {
         imageUrl    ={itemPlaceholder} 
         description ={itemDescription ? itemDescription : 'Add Description'}
         tags        ={selectedTags}
-        createdOn   ={''}
+        createdOn   ={shareDateNow}
         available   ={true}
         user        ={''} />
     </div>
