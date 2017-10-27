@@ -10,7 +10,7 @@ class ItemsCardContainer extends Component {
   filterCard = (allCards, filteredTags) => {
     if (filteredTags.length > 0){
       return allCards.filter(item =>{
-                if(item.tags.some(r => filteredTags.indexOf(r) >= 0)){
+                if(item.tags.some(r => filteredTags.findIndex(x => x.id === r.id) >= 0)){
                   return item
                 }
               })

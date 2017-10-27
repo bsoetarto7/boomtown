@@ -8,8 +8,9 @@ import {
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import { setNextStepIndex,setPrevStepIndex } from '../../redux/modules/shareReducer';
+import { getStepIndex,setNextStepIndex,setPrevStepIndex } from '../../redux/modules/shareReducer';
 import { TextInput, TextArea } from '../../components/Share/TextInputs';
+import { SelectDropDown } from '../../components/common';
 
 class RightSide extends React.Component {
 
@@ -51,8 +52,7 @@ class RightSide extends React.Component {
   }
 
   render() {
-    const {stepIndex} = this.props;
-
+    const {stepIndex, dropdownList, handleChange, selectedValue} = this.props;
     return (
       <div className="share-stepper-container">
         <Stepper activeStep={stepIndex} orientation="vertical">
@@ -89,12 +89,7 @@ class RightSide extends React.Component {
           <Step>
             <StepLabel>Categorize Your Item</StepLabel>
             <StepContent>
-              <p>
-                Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.
-              </p>
+              <SelectDropDown dropdownList={dropdownList} handleChange={handleChange} selectedValue={selectedValue} />
               {this.renderStepActions(2)}
             </StepContent>
           </Step>
@@ -107,6 +102,7 @@ class RightSide extends React.Component {
                 If you run into any problems with your ads, find out how to tell if
                 they're running and how to resolve approval issues.
               </p>
+              {this.renderStepActions(3)}
             </StepContent>
           </Step>
         </Stepper>

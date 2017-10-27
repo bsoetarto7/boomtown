@@ -4,9 +4,10 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const SelectDropDown = ({ handleChange, selectedValue, dropdownList }) =>{
+  console.log(dropdownList);
   return (
     <SelectField onChange={handleChange} value={selectedValue} hintText="Filter by Tag" multiple={true}>
-      {dropdownList.map(option => <MenuItem key={option.id} value={option.name} primaryText={option.name} checked={selectedValue && selectedValue.includes(option.name)}/>)}
+      {dropdownList.map(option => <MenuItem key={option.id} value={option} primaryText={option.tagname} checked={selectedValue && selectedValue.includes(option)}/>)}
     </SelectField>
   )
 }
