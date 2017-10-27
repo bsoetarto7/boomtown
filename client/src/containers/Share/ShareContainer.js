@@ -18,7 +18,7 @@ class ShareContainer extends Component {
     return (
       <section className="share-container">
         <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags}/>
-        <RightSide stepIndex={this.props.stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags}/>
+        <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={this.props.stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags}/>
       </section>
     );
   }

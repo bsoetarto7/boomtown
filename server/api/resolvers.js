@@ -18,7 +18,7 @@ const resolveFunctions = {
       // return getUser(id);
       return context.loaders.User.load(id);
     },
-    tags(){
+    tags(root, { id }){
       return database.getTags();
     }
   },

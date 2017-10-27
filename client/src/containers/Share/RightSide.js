@@ -25,8 +25,27 @@ class RightSide extends React.Component {
   };
 
   renderStepActions(step) {
-    const {stepIndex} = this.props;
-
+    const {stepIndex, itemTitle, itemDescription, selectedValue} = this.props;
+    let disabled = false;
+    
+    if(stepIndex === 1){
+      if(!itemTitle && !itemDescription){
+        disabled = true;
+      }else if (!itemTitle && itemDescription){
+        disabled = true;
+      }else if (itemTitle && !itemDescription){
+        disabled = true;
+      }else{
+        disabled=false
+      }
+    }
+    if(stepIndex === 2){
+      if(selectedValue.length===0){
+        disabled = true;
+      }else{
+        disabled=false
+      }
+    }
     return (
       <div style={{margin: '12px 0'}}>
         <RaisedButton
@@ -36,6 +55,7 @@ class RightSide extends React.Component {
           primary={true}
           onClick={this.handleNext}
           style={{marginRight: 12}}
+          disabled={disabled}
         />
         {step > 0 && (
           <RaisedButton
