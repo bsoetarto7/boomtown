@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configStore from './redux/configStore';
+import { loginSuccess, logout } from './redux/modules/loginReducer';
 import { 
     BrowserRouter as Router, 
     Route,
@@ -23,9 +24,28 @@ import { NotFound } from './containers/NotFound';
 import { ShareContainer } from './containers/Share';
 
 import client from './config/apolloClient';
+import * as firebase from 'firebase';
 
 const store = configStore();
 
+
+// Initialize Firebase
+const config = {
+    apiKey: "AIzaSyDcG1YAUo6WaPqacn0Bb3S130bU6hRwHp8",
+    authDomain: "boomtown-fbc08.firebaseapp.com",
+    databaseURL: "https://boomtown-fbc08.firebaseio.com",
+    projectId: "boomtown-fbc08",
+    storageBucket: "boomtown-fbc08.appspot.com",
+    messagingSenderId: "423738432051"
+};
+firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        store.dispatch(loginSuccess(user));
+    } else {
+        store.dispatch(logout());
+    }
+});
 const Boomtown = () => (
     <MuiThemeProvider muiTheme={muiTheme}>
         <Router>

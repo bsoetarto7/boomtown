@@ -6,7 +6,7 @@ import cors from 'cors';
 import createLoaders from './api/loaders';
 
 import  initConfigs from './api/configs';
-import  initPostgres from './api/pg-resource';
+import  initPostgres from './api/postgresHelpers';
 
 const app = express();
 const GQL_PORT = process.env.PORT;

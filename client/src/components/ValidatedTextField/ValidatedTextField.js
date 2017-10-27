@@ -18,18 +18,26 @@ const styles = {
     }
 };
 
-const ValidatedTextField = ({ label }) => (
+export const ValidatedEmailTextField = field => (
     <TextField
         style={styles.fieldStyle}
-        hintText={label}
-        floatingLabelText={label}
+        hintText="Email"
+        id="loginEmail"
+        type="email"
         errorStyle={styles.errorStyle}
         underlineFocusStyle={styles.underlineStyle}
+        {...field.input}
     />
 );
 
-ValidatedTextField.propTypes = {
-    label: PropTypes.string.isRequired
-};
-
-export default ValidatedTextField;
+export const ValidatedPassTextField = field => (
+    <TextField
+        style={styles.fieldStyle}
+        hintText="Password"
+        id="loginPass"
+        type="password"
+        errorStyle={styles.errorStyle}
+        underlineFocusStyle={styles.underlineStyle}
+        {...field.input}
+    />
+);
