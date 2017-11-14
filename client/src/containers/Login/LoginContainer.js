@@ -13,19 +13,19 @@ class LoginContainer extends Component {
 
     login = async (e) => {
         e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword('edivan@redacademy.com', '1234567')
-                .then( user => firebase.database()
-                                        .ref(`users/${user.uid}`)
-                                        .set({
-                                            email:'edivan@redacademy.com',
-                                            fullname:'Edivan Henrique',
-                                            bio:"I like dancing :)"
-                                        }))
-        // try{
-        //     await firebase.auth().signInWithEmailAndPassword(this.props.loginValues.loginEmail, this.props.loginValues.loginPass);
-        // }catch(e){
-        //     console.log(e);
-        // }
+        // firebase.auth().createUserWithEmailAndPassword('edivan@redacademy.com', '1234567')
+        //         .then( user => firebase.database()
+        //                                 .ref(`users/${user.uid}`)
+        //                                 .set({
+        //                                     email:'edivan@redacademy.com',
+        //                                     fullname:'Edivan Henrique',
+        //                                     bio:"I like dancing :)"
+        //                                 }))
+        try{
+            await firebase.auth().signInWithEmailAndPassword(this.props.loginValues.loginEmail, this.props.loginValues.loginPass);
+        }catch(e){
+            console.log(e);
+        }
     }
 
     render() {

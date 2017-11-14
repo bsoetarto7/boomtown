@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { addCardItemHelper } from './jsonHelpers';
 import { database } from '../index.js';
-import { getUsers } from './firebaseHelpers';
+import { getUsers, getUser } from './firebaseHelpers';
 
 const resolveFunctions = {
   Query: {
@@ -15,7 +15,7 @@ const resolveFunctions = {
       return getUsers();
     },
     user(root, { id }, context) {
-      return context.loaders.User.load(id);
+      return getUser(id);
     },
     tags(root, { id }){
       return database.getTags();
@@ -24,21 +24,21 @@ const resolveFunctions = {
   User: {
     items(user, args, context){
       if(!user.id) return null;
-      return context.loaders.UserOwnedItems.load(user.id);
+      return database.getUserOwnedItems(user.id);
     },
     borroweditems(user, args, context){
       if(!user.id) return null;
-      return context.loaders.UserBorrowedItems.load(user.id);
+      return database.getUserBorrowedItems(user.id);
     }
   },
   Item: {
     itemowner(item, args, context){
       if (!item.itemowner) return null;
-      return context.loaders.User.load(item.itemowner);
+      return getUser(item.itemowner);
     },
     borrower(item, args, context){
       if (!item.borrower) return null;
-      return context.loaders.User.load(item.borrower);
+      return getUser(item.borrower);
     },
     tags(item, args){
       return database.getTag(item.id);

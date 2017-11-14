@@ -18,6 +18,7 @@ import muiTheme from './config/theme';
 
 import Layout from './components/Layout';
 import Login from './containers/Login';
+import PrivateRoute from './PrivateRoute';
 import { ItemsCardContainer } from  './containers/Card';
 import { ProfileContainer } from  './containers/Profile';
 import { NotFound } from './containers/NotFound';
@@ -39,7 +40,9 @@ const config = {
     messagingSenderId: "423738432051"
 };
 firebase.initializeApp(config);
+
 firebase.auth().onAuthStateChanged(function(user) {
+    console.log(user);
     if (user) {
         store.dispatch(loginSuccess(user));
     } else {
@@ -52,9 +55,9 @@ const Boomtown = () => (
             <Layout>
                 <Switch>
                     <Route exact path="/login" component={Login} />
-                    <Route exact path="/" component={ItemsCardContainer} />
-                    <Route exact path="/profile/:profileID" component={ProfileContainer} />
-                    <Route exact path="/share" component={ShareContainer}/>
+                    <PrivateRoute exact path="/" component={ItemsCardContainer} />
+                    <PrivateRoute exact path="/profile/:profileID" component={ProfileContainer} />
+                    <PrivateRoute exact path="/share" component={ShareContainer}/>
                     <Route path ="*" component={NotFound} />
                 </Switch>
             </Layout>
