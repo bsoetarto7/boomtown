@@ -5,7 +5,8 @@ import { loginSuccess, logout } from './redux/modules/loginReducer';
 import { 
     BrowserRouter as Router, 
     Route,
-    Switch
+    Switch,
+    Redirect
   } from 'react-router-dom';
 
 import { ApolloProvider } from 'react-apollo';
@@ -44,9 +45,9 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function(user) {
     console.log(user);
     if (user) {
-        store.dispatch(loginSuccess(user));
+        store.dispatch(loginSuccess(user,true));
     } else {
-        store.dispatch(logout());
+        store.dispatch(logout(false));
     }
 });
 const Boomtown = () => (
