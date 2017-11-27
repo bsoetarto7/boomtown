@@ -33,6 +33,7 @@ class LoginContainer extends Component {
 
     render() {
         const { user, auth } = this.props
+        console.log(user)
         if(user && auth){
             return (
                 <Redirect to='/'/>

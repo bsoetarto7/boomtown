@@ -25,9 +25,15 @@ class RightSide extends Component {
   };
 
   renderStepActions(step) {
-    const {stepIndex, itemTitle, itemDescription, selectedValue} = this.props;
+    const {stepIndex, itemTitle, itemDescription, selectedValue, imageData} = this.props;
     let disabled = false;
-    
+    if(stepIndex === 0){
+      if(imageData){
+        disabled = false;
+      }else{
+        disabled = true;
+      }
+    }
     if(stepIndex === 1){
       if(!itemTitle && !itemDescription){
         disabled = true;
@@ -72,18 +78,14 @@ class RightSide extends Component {
   }
 
   render() {
-    const {stepIndex, dropdownList, handleChange, selectedValue} = this.props;
+    const {stepIndex, dropdownList, handleChange, selectedValue, handleImageUpload} = this.props;
     return (
       <div className="share-stepper-container">
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>
             <StepLabel>Add Image</StepLabel>
             <StepContent>
-              <p>
-                For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.
-              </p>
+              <input name="imageUpload" type="file" accept="image/*" onChange={handleImageUpload} />
               {this.renderStepActions(0)}
             </StepContent>
           </Step>

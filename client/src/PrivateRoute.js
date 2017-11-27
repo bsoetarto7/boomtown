@@ -9,9 +9,10 @@ import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const PrivateRoute = ({component:Component, user, auth, ...rest}) => {
-  if(auth){
+  if(auth !== null){
     return(
       <Route {...rest} location={rest.location} render={props => {
+        
         return (
             user ? (
               <Component {...props}/>

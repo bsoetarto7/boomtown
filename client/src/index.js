@@ -26,26 +26,19 @@ import { NotFound } from './containers/NotFound';
 import { ShareContainer } from './containers/Share';
 
 import client from './config/apolloClient';
-import * as firebase from 'firebase';
+import firebase from './firebaseHelper';
 
 const store = configStore();
 
-
-// Initialize Firebase
-const config = {
-    apiKey: "AIzaSyDcG1YAUo6WaPqacn0Bb3S130bU6hRwHp8",
-    authDomain: "boomtown-fbc08.firebaseapp.com",
-    databaseURL: "https://boomtown-fbc08.firebaseio.com",
-    projectId: "boomtown-fbc08",
-    storageBucket: "boomtown-fbc08.appspot.com",
-    messagingSenderId: "423738432051"
-};
-firebase.initializeApp(config);
-
 firebase.auth().onAuthStateChanged(function(user) {
+    let userInfo = null;
     console.log(user);
     if (user) {
-        store.dispatch(loginSuccess(user,true));
+        firebase.database().ref().child('/users/' + user.uid).once("value", (snapshot) => {
+            userInfo =  snapshot.toJSON();
+            userInfo.id = user.uid;
+            store.dispatch(loginSuccess(userInfo,true));
+        })
     } else {
         store.dispatch(logout(false));
     }
