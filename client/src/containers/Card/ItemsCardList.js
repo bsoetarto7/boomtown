@@ -15,18 +15,18 @@ const ItemsCardList = ({ cardData }) =>  {
         elementType={'ul'}
         options={masonryOptions}
     >
-      { cardData.map(data => 
-          <li key={data.id} className="image-element-class">
+      { cardData.map(data => {
+          return <li key={data.id} className="image-element-class">
             <ItemsCard 
               title       ={data.title}
               imageUrl    ={data.imageurl} 
               description ={data.description}
               tags        ={data.tags}
               createdOn   ={data.created}
-              available   ={data.borrower ? true : false}
+              available   ={data.borrower ? false : true}
               user        ={data.itemowner} />
           </li>
-        ) 
+        }) 
       }
     </Masonry>
   )

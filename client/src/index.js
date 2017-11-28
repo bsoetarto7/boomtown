@@ -32,7 +32,6 @@ const store = configStore();
 
 firebase.auth().onAuthStateChanged(function(user) {
     let userInfo = null;
-    console.log(user);
     if (user) {
         firebase.database().ref().child('/users/' + user.uid).once("value", (snapshot) => {
             userInfo =  snapshot.toJSON();
