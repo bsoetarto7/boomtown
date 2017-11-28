@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import { Link } from 'react-router-dom';
 import { ItemsCardList } from './index';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
@@ -24,6 +27,11 @@ class ItemsCardContainer extends Component {
     return(
         <section className="card-container">
           {!data.loading ?<ItemsCardList cardData={cardItems}/>:false}
+          <Link to='/share'>
+            <FloatingActionButton style={{position:'fixed', bottom:'40px', right:'80px'}}>
+              <ContentAdd />
+            </FloatingActionButton>
+          </Link>
         </section>
     )
   }
