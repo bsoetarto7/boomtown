@@ -7,10 +7,18 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import './styles.css';
+import { logout } from '../../redux/modules/loginReducer'
+import firebase from '../../firebaseHelper';
 
 class Header extends Component {
   handleChange = (event, index, value) => {
     this.props.dispatch(setFilteredtItems(value));
+  }
+  logOut = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut().then(() => {
+      this.props.dispatch(logout(false));
+    })
   }
   render(){
     const { dropdownList, filtereditems } = this.props
@@ -22,7 +30,7 @@ class Header extends Component {
           <LeftSide dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={filtereditems} />
         }
         iconElementRight={
-          <RightSide />
+          <RightSide logOut={this.logOut} />
         }
         iconStyleLeft={{margin:'0'}}
         iconStyleRight={{margin:'0'}}

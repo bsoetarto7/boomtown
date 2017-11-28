@@ -8,6 +8,9 @@ import { setSelectedTags, setImageUpload, setImageUploadPlaceHolder } from '../.
 import './styles.css';
 import firebase from '../../firebaseHelper';
 import { storage } from '../../../../server/node_modules/firebase';
+import { 
+  Redirect
+} from 'react-router-dom';
 
 class ShareContainer extends Component {
  
@@ -27,7 +30,7 @@ class ShareContainer extends Component {
   }
 
   submitShareItem = async () => {
-    const { imageFile, selectedTags, user, mutate, shareDateNow } = this.props;
+    const { imageFile, selectedTags, user, mutate, shareDateNow, history } = this.props;
     const { itemTitle, itemDescription } = this.props.inputValues;
     var storageRef = firebase.storage().ref();
     const imageURL = await storageRef.child(`images/${user.id}/${imageFile.name}-${shareDateNow}`)
@@ -48,7 +51,7 @@ class ShareContainer extends Component {
       }
     })
     .then( res => {
-      console.log(res);
+      history.push('/')
     });
   }
 

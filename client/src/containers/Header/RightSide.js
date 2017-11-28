@@ -1,10 +1,10 @@
 import React from 'react';
 import { ProfileButton,LogoutButton } from '../../components/common';
 
-const RightSide = () =>(
+const RightSide = ({logOut}) =>(
   <div className="appbar-right-section">
     <ProfileButton />
-    <LogoutButton />
+    <LogoutButton logOut={logOut} />
   </div>
 )
 
