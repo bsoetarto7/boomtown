@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import { addCardItemHelper } from './jsonHelpers';
 import { database } from '../index.js';
 import { getUsers, getUser } from './firebaseHelpers';
 
@@ -17,7 +16,7 @@ const resolveFunctions = {
     user(root, { id }, context) {
       return getUser(id);
     },
-    tags(root, { id }){
+    tags(){
       return database.getTags();
     }
   },
@@ -46,7 +45,7 @@ const resolveFunctions = {
   },
   Mutation:{
     addCardItem(root, args) {
-      return addCardItemHelper(args.title, args.description, args.imageurl, args.tags, args.itemowner);
+      return database.addCardItemHelper(args.title, args.description, args.imageurl, args.itemowner, args.tags);
     }
   }
 };

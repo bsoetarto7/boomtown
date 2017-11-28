@@ -26,7 +26,7 @@ const typeDefs = `
   }
   type Query {
     items:[Item]
-    item(id: ID!): Item
+    item(id: ID!): [Item]
     users:[User]
     user(id: ID!): User
     tags:[Tag]

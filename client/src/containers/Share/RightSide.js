@@ -25,7 +25,7 @@ class RightSide extends Component {
   };
 
   renderStepActions(step) {
-    const {stepIndex, itemTitle, itemDescription, selectedValue, imageData} = this.props;
+    const {stepIndex, itemTitle, itemDescription, selectedValue, imageData, submitShareItem} = this.props;
     let disabled = false;
     if(stepIndex === 0){
       if(imageData){
@@ -59,7 +59,7 @@ class RightSide extends Component {
           disableTouchRipple={true}
           disableFocusRipple={true}
           primary={true}
-          onClick={this.handleNext}
+          onClick={stepIndex === 3 ? submitShareItem : this.handleNext}
           style={{marginRight: 12}}
           disabled={disabled}
         />
