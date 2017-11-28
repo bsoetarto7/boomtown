@@ -16,13 +16,12 @@ class Header extends Component {
   }
   logOut = (e) => {
     e.preventDefault();
-    firebase.auth().signOut().then(() => {
-      this.props.dispatch(logout(false));
-    })
+    firebase.auth().signOut();
   }
   render(){
-    const { dropdownList, filtereditems } = this.props
+    const { dropdownList, filtereditems, user } = this.props
     const { tags, loading } = this.props.data;
+
     return(
       <AppBar
         style={{backgroundColor:'white', display:'flex',alignItems:'center', maxWidth:'1140px', margin:'0 auto',boxShadow:'none', padding:'0'}}
@@ -30,7 +29,7 @@ class Header extends Component {
           <LeftSide dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={filtereditems} />
         }
         iconElementRight={
-          <RightSide logOut={this.logOut} />
+          <RightSide logOut={this.logOut} userID={user ? user.id : false }/>
         }
         iconStyleLeft={{margin:'0'}}
         iconStyleRight={{margin:'0'}}
@@ -55,7 +54,8 @@ query{
 
 const mapStateToProps = state => { 
   return {
-    filtereditems: state.filterCards.filtereditems
+    filtereditems: state.filterCards.filtereditems,
+    user: state.login.user,
   }
 };
 
