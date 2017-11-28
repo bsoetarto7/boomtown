@@ -4,6 +4,7 @@ const PREVIOUS_STEP_INDEX = 'PREVIOUS_STEP_INDEX';
 const SET_SELECTED_TAGS = 'SET_SELECTED_TAGS';
 const SET_IMAGE_FILE_UPLOAD = 'SET_IMAGE_FILE_UPLOAD';
 const SET_IMAGE_FILE_UPLOAD_PLACEHOLDER = 'SET_IMAGE_FILE_UPLOAD_PLACEHOLDER';
+const RESET_SHARE = 'RESET_SHARE';
 
 export const getStepIndex = () => ({
   type:GET_STEP_INDEX
@@ -32,6 +33,10 @@ export const setImageUpload = (file) => ({
 export const setImageUploadPlaceHolder = (imageData) => ({
   type: SET_IMAGE_FILE_UPLOAD_PLACEHOLDER,
   imageData:imageData
+})
+
+export const resetShare = () => ({
+  type: RESET_SHARE,
 })
 
 const initialState = {
@@ -69,10 +74,19 @@ export default (state = initialState, action) => {
         imageFile: action.file
       }
     case SET_IMAGE_FILE_UPLOAD_PLACEHOLDER:
-    return{
-      ...state,
-      imageData: action.imageData
-    }
+      return{
+        ...state,
+        imageData: action.imageData
+      }
+    case RESET_SHARE:
+      return{
+        ...state,
+        stepIndex:0,
+        selectedTags:[],
+        imageFile:null,
+        imageData:null,
+        shareDateNow: `${(new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().slice(0, -1).replace('T', ' ')}-07`
+      }
     default:
       return state;
   }

@@ -79,6 +79,7 @@ class RightSide extends Component {
 
   render() {
     const {stepIndex, dropdownList, handleChange, selectedValue, handleImageUpload} = this.props;
+    console.log(this.props);
     return (
       <div className="share-stepper-container">
         <Stepper activeStep={stepIndex} orientation="vertical">

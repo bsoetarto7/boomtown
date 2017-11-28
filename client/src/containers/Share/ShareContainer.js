@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import {LeftSide, RightSide} from './index';
-import { setSelectedTags, setImageUpload, setImageUploadPlaceHolder } from '../../redux/modules/shareReducer';
+import { setSelectedTags, setImageUpload, setImageUploadPlaceHolder, resetShare } from '../../redux/modules/shareReducer';
 import './styles.css';
 import firebase from '../../firebaseHelper';
 import { storage } from '../../../../server/node_modules/firebase';
@@ -51,19 +51,21 @@ class ShareContainer extends Component {
       }
     })
     .then( res => {
+      this.props.dispatch(resetShare());
+      this.props.data.refetch();
       history.push('/')
     });
   }
 
   render() {
     const { itemTitle, itemDescription } = this.props.inputValues;
-    const { dropdownList, selectedTags, shareDateNow, user, imageFile, imageData } = this.props;
+    const { dropdownList, selectedTags, shareDateNow, user, imageFile, imageData, stepIndex } = this.props;
     const { tags, loading } = this.props.data;
-
+    console.log(this.props);
     return (
       <section className="share-container">
         <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags} shareDateNow={shareDateNow} user={user} imageData={imageData} />
-        <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={this.props.stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags} handleImageUpload={this.handleImageUpload} imageData={imageData} submitShareItem={this.submitShareItem} />
+        <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags} handleImageUpload={this.handleImageUpload} imageData={imageData} submitShareItem={this.submitShareItem} />
       </section>
     );
   }
