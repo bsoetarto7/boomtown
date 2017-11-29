@@ -1,6 +1,4 @@
 import DataLoader from 'dataloader';
-
-import { getItem } from './jsonHelpers';
 import { getUser } from './firebaseHelpers';
 import { database } from '../index.js';
 

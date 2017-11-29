@@ -7,7 +7,7 @@ import placeholderIMG from '../../images/item-placeholder.jpg'
 const CardImage = ({imageUrl, available}) => {
   return(
     <CardMedia overlay={!available && <CardTitle subtitle="Unavailable" />}>
-      <img src={imageUrl.length !== 0 ? imageUrl : placeholderIMG} alt="Card Image"/>
+      <img src={imageUrl.length !== 0 ? imageUrl : placeholderIMG} alt="item cards"/>
     </CardMedia>
   )
 }

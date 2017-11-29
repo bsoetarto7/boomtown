@@ -7,10 +7,6 @@ import {LeftSide, RightSide} from './index';
 import { setSelectedTags, setImageUpload, setImageUploadPlaceHolder, resetShare } from '../../redux/modules/shareReducer';
 import './styles.css';
 import firebase from '../../firebaseHelper';
-import { storage } from '../../../../server/node_modules/firebase';
-import { 
-  Redirect
-} from 'react-router-dom';
 
 class ShareContainer extends Component {
  
@@ -30,7 +26,8 @@ class ShareContainer extends Component {
   }
 
   submitShareItem = async () => {
-    const { imageFile, selectedTags, user, mutate, shareDateNow, history } = this.props;
+    const { imageFile, selectedTags, mutate, shareDateNow, history } = this.props;
+    const { user } = this.props.data;
     const { itemTitle, itemDescription } = this.props.inputValues;
     var storageRef = firebase.storage().ref();
     const imageURL = await storageRef.child(`images/${user.id}/${imageFile.name}-${shareDateNow}`)
@@ -48,34 +45,64 @@ class ShareContainer extends Component {
         imageurl: imageURL,
         tags: allSelectedTagsID,
         itemowner: user.id
-      }
+      },
+      refetchQueries: [{
+        query: gql`
+          query{
+            items{
+              id
+              title
+              description
+              imageurl
+              tags{
+                id
+                tagname
+              }
+              itemowner{
+                id
+                fullname
+                email
+                bio
+              }
+              created
+              borrower{
+                id
+                fullname
+              }
+            }
+          }
+        `
+      }]
     })
     .then( res => {
       this.props.dispatch(resetShare());
-      this.props.data.refetch();
       history.push('/')
     });
   }
 
   render() {
     const { itemTitle, itemDescription } = this.props.inputValues;
-    const { dropdownList, selectedTags, shareDateNow, user, imageFile, imageData, stepIndex } = this.props;
-    const { tags, loading } = this.props.data;
-    console.log(this.props);
+    const { selectedTags, shareDateNow, imageData, stepIndex } = this.props;
+    const { tags, user, loading } = this.props.data;
     return (
       <section className="share-container">
-        <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags} shareDateNow={shareDateNow} user={user} imageData={imageData} />
-        <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={stepIndex} dropdownList={!loading?tags:[]} handleChange={this.handleChange} selectedValue={selectedTags} handleImageUpload={this.handleImageUpload} imageData={imageData} submitShareItem={this.submitShareItem} />
+        <LeftSide itemTitle={itemTitle} itemDescription={itemDescription} selectedTags={selectedTags} shareDateNow={shareDateNow} user={!loading ? user : {email:'', fullname:''}} imageData={imageData} />
+        <RightSide itemTitle={itemTitle} itemDescription={itemDescription} stepIndex={stepIndex} dropdownList={!loading ? tags : []} handleChange={this.handleChange} selectedValue={selectedTags} handleImageUpload={this.handleImageUpload} imageData={imageData} submitShareItem={this.submitShareItem} />
       </section>
     );
   }
 }
 
-const fetchTagsData = gql`
-  query{
+const fetchTagsUserData = gql`
+  query fetchTagsUserData($id:ID!){
     tags{
       id
       tagname
+    }
+    user(id:$id){
+      id
+      email
+      fullname
     }
   }
 `
@@ -113,6 +140,12 @@ const mapStateToProps = state => {
   }
 };
 
-const TagsData = compose(graphql(fetchTagsData), graphql(addCardItem))(ShareContainer);
+const TagsData = compose(graphql(fetchTagsUserData,{
+  options: ownProps => ({
+    variables:{
+      id:ownProps.user.uid
+    }
+  })
+}), graphql(addCardItem))(ShareContainer);
 
 export default connect(mapStateToProps)(TagsData)

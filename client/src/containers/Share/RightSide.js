@@ -5,10 +5,9 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import { getStepIndex,setNextStepIndex,setPrevStepIndex } from '../../redux/modules/shareReducer';
+import { setNextStepIndex,setPrevStepIndex } from '../../redux/modules/shareReducer';
 import { TextInput, TextArea } from '../../components/Share/TextInputs';
 import { SelectDropDown } from '../../components/common';
 
@@ -79,7 +78,7 @@ class RightSide extends Component {
 
   render() {
     const {stepIndex, dropdownList, handleChange, selectedValue, handleImageUpload} = this.props;
-    console.log(this.props);
+
     return (
       <div className="share-stepper-container">
         <Stepper activeStep={stepIndex} orientation="vertical">
@@ -119,12 +118,7 @@ class RightSide extends Component {
           <Step>
             <StepLabel>Confirm Things!</StepLabel>
             <StepContent>
-              <p>
-                Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.
-              </p>
+              <p>Great! If you're happy with everything, tap the button.</p>
               {this.renderStepActions(3)}
             </StepContent>
           </Step>

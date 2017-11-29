@@ -5,8 +5,7 @@ import { loginSuccess, logout } from './redux/modules/loginReducer';
 import { 
     BrowserRouter as Router, 
     Route,
-    Switch,
-    Redirect
+    Switch
   } from 'react-router-dom';
 
 import { ApolloProvider } from 'react-apollo';
@@ -31,13 +30,8 @@ import firebase from './firebaseHelper';
 const store = configStore();
 
 firebase.auth().onAuthStateChanged(function(user) {
-    let userInfo = null;
     if (user) {
-        firebase.database().ref().child('/users/' + user.uid).once("value", (snapshot) => {
-            userInfo =  snapshot.toJSON();
-            userInfo.id = user.uid;
-            store.dispatch(loginSuccess(userInfo,true));
-        })
+        store.dispatch(loginSuccess(user,true));
     } else {
         store.dispatch(logout(false));
     }

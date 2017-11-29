@@ -41,7 +41,7 @@ export default function(app){
                     acc = (`${acc}(${res.rows[0].id}, ${curr})`)
                   }
                   return acc
-                 },[]);
+                 },'');
                 pgClient.query(`INSERT INTO itemtags (itemid, tagid) VALUES ${sqlValues}`)
               });
     }
